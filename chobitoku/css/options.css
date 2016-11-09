@@ -1,0 +1,73 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+
+}
+
+body {
+
+    background-color: #cccccc;
+}
+div{
+    border-radius: 10px;
+    border: 2px #bbbbbb;
+    border-style: dashed;
+    font-size: 1.4rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 60px;
+    width: 30%;
+
+}
+header, section {
+    margin-bottom: 25px;
+}
+
+section:last-child {
+    margin-bottom: 0;
+}
+
+h1 {
+    font-size: 2.0rem;
+}
+
+h2 {
+    font-size: 1.6rem;
+}
+
+dt {
+    display: inline-block;
+    margin-right: 15px;
+    vertical-align: middle;
+    width: 200px;
+}
+
+dd {
+    display: inline-block;
+    margin: 0;
+}
+
+input[type="text"], input[type="password"] {
+    width: 154px;
+}
+
+.notice {
+    color: #737373;
+}
+
+.restoreNotice {
+    color: #737373;
+    display: block;
+    font-size: 1.3rem;
+    margin-top: 2px;
+}
+
+#status {
+    color: #999;
+    display: inline-block;
+    margin: 0;
+    margin-left: 10px;
+}

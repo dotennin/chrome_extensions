@@ -1,0 +1,100 @@
+@charset "utf-8";
+
+#kotak-dialog {
+    position:fixed;
+    top:20%;
+    left:25%;
+    margin:auto;
+    width:50%;
+    /*
+      width:1020px;
+      height:530px;
+      margin:0px 0px 0px -600px;
+      */
+    height: auto;
+    background-color:#fff;
+    -webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.4);
+    -moz-box-shadow:0px 1px 2px rgba(0,0,0,0.4);
+    box-shadow:0px 1px 2px rgba(0,0,0,0.4);
+    z-index:2147483647;
+    display:none;
+}
+
+#kotak-dialog *:focus {
+    outline:none;
+}
+
+#kotak-dialog h3.title {
+    background-color:#3B5998;
+    padding:10px 15px;
+    color:#fff;
+    font:normal 16px Arial,Sans-Serif;
+    margin:0px 0px 0px 0px;
+    position:relative;
+}
+
+#kotak-dialog h3.title a {
+    position:absolute;
+    top:10px;
+    right:15px;
+    color:#fff;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+#kotak-dialog .isi-dialog {
+    margin:15px;
+    font:normal 12px Arial,Sans-Serif;
+}
+
+#kotak-dialog .button-wrapper {
+    padding:10px 15px 0px;
+    /*border-top:1px solid #ddd;*/
+    margin-top:15px;
+}
+
+#kotak-dialog .button-wrapper button {
+    background-color:#FF0C39;
+    border:none;
+    font:bold 12px Arial,Sans-Serif;
+    color:#fff;
+    padding:5px 10px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    cursor:pointer;
+}
+
+#kotak-dialog .button-wrapper button:hover {
+    background-color:#aaa;
+}
+
+#dialog-overlay {
+    position:fixed !important;
+    position:absolute;
+    z-index:10000;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+    background-color:#000;
+    display:none;
+}
+
+/* Iframe */
+#iframeContainer iframe {
+    top:10%;
+    margin:auto;
+    /*  width:1020px;
+      height:530px;*/
+    width:100%;
+    height: 500px;
+    border:none;
+    background-color:#ccc;
+    overflow:auto;
+}
+
+
+#nav-subnav-add {
+    position: absolute;
+}

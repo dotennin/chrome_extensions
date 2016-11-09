@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>オプション - Shinsei Power Direct AutoFill</title>
+    <link href="css/options.css" rel="stylesheet">
+  </head>
+
+  <body>
+  <div>
+    <header>
+      <h1>ちょび得ショッピング</h1>
+
+      <p class="notice">
+        情報は、暗号化されてコンピュータ内に保存されます。
+      </p>
+    </header>
+    <form id="form">
+      <section>
+        <dl>
+          <dt>
+            ログインID/メールアドレス:
+          </dt>
+          <dd>
+            <input type="email" name="email" id="accountId" value="" placeholder="メールアドレス" required />
+          </dd>
+        </dl>
+
+        <dl>
+          <dt>
+            パスワード:
+          </dt>
+          <dd>
+            <input type="password" id="accountPassword" placeholder="パスワード" required>
+          </dd>
+        </dl>
+
+      </section>
+
+
+      <section>
+        <input type="submit" value="保存">
+        <p id="status"></p>
+      </section>
+    </form>
+  </div>
+    <script src="js/options.js"></script>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

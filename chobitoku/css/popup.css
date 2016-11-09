@@ -1,0 +1,110 @@
+@charset "utf-8";
+
+
+body {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    font-size: 1.4rem;
+    margin: 4px;
+    padding: 20px;
+    width: 400px;
+}
+
+.v4-tease{
+    display: block;
+    padding: 0px 15px;
+    font-weight: 900;
+    color: black;
+    text-align: center;
+    background-color: white;
+}
+
+.btn-primary-red{
+    border-radius:0;
+    border: 15px solid transparent;
+    background-color: #D85145;
+    color: white;
+    font-weight: bold;
+    margin: 4px;
+    width: 200px;
+}
+.btn-primary-blue{
+    width: 200px;
+    margin: 4px;
+    border-radius:0;
+    border: 15px solid transparent;
+    background-color: #525263;
+    color: white;
+    font-weight: bold;
+}
+
+div#wrapper {
+    margin: 10px;
+    padding: 10px;
+}
+
+/* donation */
+#support_message {
+    margin-top: 10px;
+    line-height: 150%;
+}
+
+div#support_message {
+    line-height: 150%;
+}
+
+/* social networks */
+div#social {
+    margin-top: 15px;
+}
+
+div#social-networks {
+    margin: 15px auto;
+    font-size: 110%;
+}
+
+
+/* mode setting section */
+div#setting {
+    margin-top: 15px;
+}
+
+div#buttons {
+    margin: 15px auto;
+    clear: both;
+	display: inline-block;
+}
+
+div#setting_description tr:last-child {
+    border-bottom: 1px solid #DDDDDD !important;
+    border-bottom: 1px solid #DDDDDD !important;
+}
+
+div.text_block {
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* extra info and links */
+div#rating {
+    display: none;
+}
+
+
+div#version {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.fotter-set {
+    background: rgba(255,255,255,0.9);
+    border-top: solid 1px #aaa;
+    width: 100%;
+    z-index: 100;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+}

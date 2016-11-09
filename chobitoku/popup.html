@@ -1,0 +1,48 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Getting Started Extension's Popup</title>
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+    <meta charset="utf-8">
+    <script src="js/script.js"></script>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/content.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap-3.3.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/vendor/font-awesome-4.4.0.min.css">
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
+  </head>
+  <body>
+    <a target="_blank" id="shop_url" class="v4-tease" style="text-decoration: none;text-decoration-color: #5e5e5e"></a>
+      <div id="wrapper" class="container-fluid">
+        <div id="support">
+
+          <div class="text-center">
+            <p id="support_message"></p>
+            <button type="button"
+                    class="btn btn-primary-red"
+                    id="add_cart"
+            >ちょび得カートに入れる
+            </button>
+            <button type="button"
+                    class="btn btn-primary-blue"
+                    id="add_favorite"
+            >お気に入りに追加
+            </button>
+          </div>
+        </div>
+      </div>  <!-- wrapper -->
+    <div id="version" class="text-muted"><small></small></div>
+  </body>
+</html>
+
