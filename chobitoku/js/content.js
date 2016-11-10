@@ -1,32 +1,51 @@
 /**
  * Created by root on 16/09/13.
  */
+chrome.extension.onRequest.addListener(function(request, sender, callback) {
 
-$(function(){
-    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-        var unselectedDims = $('.unselectedDims');
-        if(unselectedDims.length > 0){
-            alert("購入するには、"+unselectedDims[0].innerHTML+"を選択してください");
-            return;
-        }
-        var asin = $('#ASIN').val();
-        var quantity = $('#quantity').val();
+    if (request.action == "getAsin") {
+        callback(document.getElementById('ASIN').value);
+    }
 
-        if(!asin){
-            alert("このページでは該当する商品コードは見つかりません。");
-            return;
-        }
-        if(!quantity){
-            quantity = 1;
-        }
+});
+//popup button click
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    var asin = document.getElementById('ASIN').value;
+    var postData = {};
+    switch (request.action){
+        case "cart":
+            var unselectedDims = $('.unselectedDims');
+            if(unselectedDims.length > 0){
+                alert("購入するには、"+unselectedDims[0].innerHTML+"を選択してください");
+                return;
+            }
 
-        var postData = {
-            "ASIN": asin,
-            "quantity": quantity
-        };
+            var quantity = $('#quantity').val();
 
-        sendResponse(postData);
-    });
+            if(!asin){
+                alert("このページでは該当する商品コードは見つかりません。");
+                return;
+            }
+            if(!quantity){
+                quantity = 1;
+            }
+
+            postData = {
+                "ASIN": asin,
+                "quantity": quantity
+            };
+            break;
+    }
+
+
+    sendResponse(postData);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+
+
+
+
 
 //     var str = (function(){/*
 //      <div id="kotak-dialog">

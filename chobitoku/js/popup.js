@@ -1,3 +1,16 @@
+/*var product_dict = {};
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+
+});
+var port = chrome.extension.connect({
+  name: "Sample Communication"
+});
+port.postMessage("getProductDict");
+port.onMessage.addListener(function(msg) {
+  console.log(msg);
+  product_dict = msg;
+});*/
 
 document.addEventListener('DOMContentLoaded', function() {
   //define home page url
@@ -6,31 +19,30 @@ document.addEventListener('DOMContentLoaded', function() {
   $('#version').find('small')[0].innerHTML = MANIFEST_DATA.description + ' ' + MANIFEST_DATA.version;
 
   $('#add_cart, #add_favorite').on('click', function () {
-    var mode = this.id;
-    onButtonClick(mode);
+    onButtonClick(this);
   });
 
-
+  //send message to contents
   function onButtonClick(mode) {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {
-            color: '#' + ""
+            action: "cart"
           },
           function(response) {
 
             if(response){
-
+              $(mode).attr('disabled','disabled');
               chrome.storage.local.get(null, function (value) {
 
                 if(value['login_email'] && value['login_pass']){
 
-                  var url = "http://"+ CHOBITOKU_URL +"/api/addItem";
+                  var url = PROTOCOL+ CHOBITOKU_URL +"/api/addItem";
                   var postData = {
                     "ASIN": response.ASIN,
                     "quantity": response.quantity,
                     "login_email": value['login_email'],
                     "login_pass":value['login_pass'],
-                    "mode": mode
+                    "mode": mode.id
                   };
 
                   $.ajax({
@@ -41,12 +53,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     success: function(json_data, dataType)
                     {console.log(json_data);
                       if(json_data['response_code'] === 100){
-
+                        $(mode).attr('disabled',null);
                         var result = json_data['result'];
                         if(result.hasOwnProperty('counter')){
                           //cart item counter calculate
-                          COUNTER = result['counter'];
-                          chrome.browserAction.setBadgeText({ text: String(COUNTER) });
+                          counter = result['counter'];
+                          chrome.browserAction.setBadgeText({ text: String(counter) });
 
                           var ret = confirm("商品を追加されました。\nちょび得レジに進みますか?");
                           if(ret === true){
@@ -78,5 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
           });
     });
   }
+
 });
 

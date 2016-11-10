@@ -1,11 +1,14 @@
 /**
  * Created by root on 16/11/08.
  */
-const CHOBITOKU_URL = "nochi0105.mydns.jp";
+//const CHOBITOKU_URL = "nochi0105.mydns.jp";
+const CHOBITOKU_URL = "192.168.1.56/chobitoku/ec-cube/html";
+//const CHOBITOKU_URL = "localhost";
 const AMAZON_URL = "www.amazon.co.jp";
+const PROTOCOL = "http://";
 const MANIFEST_DATA = chrome.app.getDetails();
 //cart item quantity
-var COUNTER = 0;
+var counter = 0;
 /**
 * @param url http url
  * @param data data
@@ -15,14 +18,14 @@ function send(url, data, async) {
 
     data = undefined ? {} : data;
     async = undefined ? true : async;
-    $.ajax({
+    return $.ajax({
         type: "POST",
         dataType: "json",
         url: url,
         data: JSON.stringify(data),
-        async: async,
-        success: function(res, dataType)
-        {console.log(res);
+        async: async
+        /*success: function(res, dataType)
+        {
             if (res['response_code'] === 100) {
                 return res['result'];
             }else{
@@ -34,7 +37,7 @@ function send(url, data, async) {
         error: function(XMLHttpRequest, textStatus, errorThrown)
         {
             alert('Error : ' + errorThrown);
-        }
+        }*/
     });
 
 }
@@ -48,7 +51,7 @@ function saveOptions(login_data) {
         };
     }
 
-    var url = "http://"+ CHOBITOKU_URL +"/api/login";
+    var url = PROTOCOL+ CHOBITOKU_URL +"/api/login";
 
     $.ajax({
         type: "POST",
@@ -57,10 +60,10 @@ function saveOptions(login_data) {
         data: JSON.stringify(login_data),
         async: false,
         success: function(res, dataType)
-        {console.log(res);
+        {
             if (res['response_code'] === 100) {
-                COUNTER = res['result']['counter'];
-                chrome.browserAction.setBadgeText({ text: String(COUNTER) });
+                counter = res['result']['counter'];
+                chrome.browserAction.setBadgeText({ text: String(counter) });
                 chrome.storage.local.set(login_data, showStatus('保存しました。'));
             }else{
                 // サーバが失敗を返した場合
@@ -116,6 +119,20 @@ function getLoginInfo() {
     return result;
 }
 
+function setIcon(asin, is_active) {
+    if(is_active){
+        if(product_dict.indexOf(asin) === -1){
+            product_dict.push(asin);
+        }
+        chrome.browserAction.setPopup({popup: MANIFEST_DATA.browser_action.default_popup});
+        chrome.browserAction.setIcon({ path:"icon/active.png"});
+    }else{
+        chrome.browserAction.setPopup({popup: ""});
+        chrome.browserAction.setIcon({ path:"icon/stop.png"});
+    }
+
+}
+
 var isset = function(data){
     if(data === "" || data === null || data === undefined){
         return false;
@@ -123,3 +140,10 @@ var isset = function(data){
         return true;
     }
 };
+
+function showStatus(msg) {
+    var elem = document.getElementById('status');
+    if(!!elem){
+        elem.textContent = msg;
+    }
+}
