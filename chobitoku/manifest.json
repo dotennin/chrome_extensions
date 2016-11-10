@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "ちょび得",
   "description": "ちょび得ショピングプラグイン",
-  "version": "1.0",
+  "version": "1.1",
   "content_scripts": [
     {
       "matches": ["https://www.amazon.co.jp/*"],

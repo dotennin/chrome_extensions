@@ -30,20 +30,28 @@ function validateAsin() {
     });
 }
 
+//is_user logged get pageAsin to server
 function getCurrentPageAsin(tabId) {
+
     chrome.tabs.sendRequest(tabId, {action: "getAsin"}, function(asin) {
         if(asin){
-            var data = {
-                'ASIN': asin
-            };
-            var url = PROTOCOL + CHOBITOKU_URL +'/api/validateItem';
-            send(url, data).success(function (res, dataType) {
-                console.log(res);
-                if (res['response_code'] === 100) {
-                    //save prodcut id
-                    setIcon(asin, true);
+            chrome.storage.local.get(null, function (value) {
+                if(value['login_email'] && value['login_pass']){
+                    var data = {
+                        'ASIN': asin
+                    };
+                    var url = PROTOCOL + CHOBITOKU_URL +'/api/validateItem';
+                    send(url, data).success(function (res, dataType) {
+                        console.log(res);
+                        if (res['response_code'] === 100) {
+                            //save prodcut id
+                            setIcon(asin, true);
+                        }else{
+                            setIcon(null, false);
+                        }
+                    });
                 }else{
-                    setIcon(null, false);
+                    login();
                 }
             });
         }
@@ -82,7 +90,7 @@ chrome.tabs.onRemoved.addListener( function( tab ){
     //chrome.browserAction.setBadgeText({ text: String(COUNTER) });
 });
 chrome.tabs.onUpdated.addListener(function(tabId , info) {
-    
+
     switch (info.status){
         case "complete":
             getCurrentPageAsin(tabId);

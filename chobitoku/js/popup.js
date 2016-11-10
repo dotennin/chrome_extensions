@@ -1,8 +1,5 @@
 /*var product_dict = {};
 
-chrome.browserAction.onClicked.addListener(function(tab) {
-
-});
 var port = chrome.extension.connect({
   name: "Sample Communication"
 });
@@ -11,10 +8,20 @@ port.onMessage.addListener(function(msg) {
   console.log(msg);
   product_dict = msg;
 });*/
+chrome.storage.local.get(null, function (value) {
+
+  if (value['login_email'] && value['login_pass']) {
+  }
+});
 
 document.addEventListener('DOMContentLoaded', function() {
   //define home page url
-  $('#shop_url').attr('href', "http://"+CHOBITOKU_URL).html(MANIFEST_DATA.name);
+  $('#shop_url').attr('href', PROTOCOL+CHOBITOKU_URL).html(MANIFEST_DATA.name);
+
+  //define add_cart url and add_favorite_url
+  $('#add_cart_url').attr('href', PROTOCOL+CHOBITOKU_URL+'/cart');
+  $('#add_favorite_url').attr('href', PROTOCOL+CHOBITOKU_URL+'/mypage/favorite');
+
   //define version description
   $('#version').find('small')[0].innerHTML = MANIFEST_DATA.description + ' ' + MANIFEST_DATA.version;
 
@@ -82,8 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   });
 
                 }else{
-                  alert("商品を購入するにはログインが必要となります。");
-                  window.open('chrome-extension://'+ chrome.runtime.id +'/options.html');
+                  login();
                 }
               });
             }

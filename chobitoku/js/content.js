@@ -6,7 +6,6 @@ chrome.extension.onRequest.addListener(function(request, sender, callback) {
     if (request.action == "getAsin") {
         callback(document.getElementById('ASIN').value);
     }
-
 });
 //popup button click
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
