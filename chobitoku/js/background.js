@@ -13,19 +13,20 @@ function validateAsin() {
         lastFocusedWindow: true
     }, function(tab) {
         var current_tab = tab[0];
-
-        var url = new URL(current_tab.url);
-        var domain = url.hostname;
-        if(domain === AMAZON_URL){
-            chrome.tabs.sendRequest(current_tab.id, {action: "getAsin"}, function(asin) {
-                if(product_dict.indexOf(asin) >= 0){
-                    setIcon(asin, true);
-                }else{
-                    setIcon(null, false);
-                }
-            });
-        }else{
-            setIcon(null, false);
+        if(!!current_tab.url){
+            var url = new URL(current_tab.url);
+            var domain = url.hostname;
+            if(domain === AMAZON_URL){
+                chrome.tabs.sendRequest(current_tab.id, {action: "getAsin"}, function(asin) {
+                    if(product_dict.indexOf(asin) >= 0){
+                        setIcon(asin, true);
+                    }else{
+                        setIcon(null, false);
+                    }
+                });
+            }else{
+                setIcon(null, false);
+            }
         }
     });
 }
@@ -51,7 +52,7 @@ function getCurrentPageAsin(tabId) {
                         }
                     });
                 }else{
-                    login();
+                    //login();
                 }
             });
         }
@@ -104,7 +105,7 @@ chrome.tabs.onHighlighted.addListener(function() {
     validateAsin();
 });
 chrome.windows.onFocusChanged.addListener(function() {
-    validateAsin();
+    //validateAsin();
 });
 chrome.windows.getCurrent(function() {
     validateAsin()

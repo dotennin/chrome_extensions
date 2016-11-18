@@ -1,9 +1,9 @@
 /**
  * Created by root on 16/11/08.
  */
-//const CHOBITOKU_URL = "nochi0105.mydns.jp";
+const CHOBITOKU_URL = "54.238.249.224/chobitoku/html";
 //const CHOBITOKU_URL = "192.168.1.56/chobitoku/ec-cube/html";
-const CHOBITOKU_URL = "localhost";
+//const CHOBITOKU_URL = "localhost";
 const AMAZON_URL = "www.amazon.co.jp";
 const PROTOCOL = "http://";
 const MANIFEST_DATA = chrome.app.getDetails();
@@ -104,11 +104,13 @@ function setIcon(asin, is_active) {
         if(product_dict.indexOf(asin) === -1){
             product_dict.push(asin);
         }
-        chrome.browserAction.setPopup({popup: MANIFEST_DATA.browser_action.default_popup});
+        //chrome.browserAction.setPopup({popup: MANIFEST_DATA.browser_action.default_popup});
         chrome.browserAction.setIcon({ path:"icon/active.png"});
+        chrome.browserAction.setTitle({title :"active"});
     }else{
-        chrome.browserAction.setPopup({popup: "popup_disable.html"});
+        //chrome.browserAction.setPopup({popup: "popup_disable.html"});
         chrome.browserAction.setIcon({ path:"icon/stop.png"});
+        chrome.browserAction.setTitle({title :"stop"});
     }
 }
 

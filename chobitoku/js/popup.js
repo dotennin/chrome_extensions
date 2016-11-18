@@ -8,15 +8,28 @@ port.onMessage.addListener(function(msg) {
   console.log(msg);
   product_dict = msg;
 });*/
-chrome.storage.local.get(null, function (value) {
-
-  if (value['login_email'] && value['login_pass']) {
-  }
-});
 
 document.addEventListener('DOMContentLoaded', function() {
+
+  chrome.storage.local.get(null, function (value) {
+
+    //while user is not login
+    if (!value['login_email'] || !value['login_pass']) {
+      $('#login').removeClass('hidden');
+      $('#add_cart, #add_favorite, #add_cart_url, #add_favorite_url').attr('disabled', 'disabled');
+      $('#add_cart_url, #add_favorite_url').removeAttr('href');
+    }else{
+      chrome.browserAction.getTitle({},function(title){
+        if(title !== 'active'){
+          $('#add_cart, #add_favorite').attr('disabled', 'disabled');
+        }
+      });
+      $('#logout').removeClass('hidden');
+    }
+  });
+
   //define home page url
-  $('#shop_url').attr('href', PROTOCOL+CHOBITOKU_URL).html(MANIFEST_DATA.name);
+  //$('#shop_url').attr('href', PROTOCOL+CHOBITOKU_URL).html(MANIFEST_DATA.name);
 
   //define add_cart url and add_favorite_url
   $('#add_cart_url').attr('href', PROTOCOL+CHOBITOKU_URL+'/cart');
@@ -24,6 +37,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   //define version description
   $('#version').find('small')[0].innerHTML = MANIFEST_DATA.description + ' ' + MANIFEST_DATA.version;
+
+  //logout button
+  $('#logout').click(function () {
+    chrome.storage.local.clear();
+    location.reload();
+  });
+
+  //login button
+  $('#login').click(function () {
+    window.open('chrome-extension://'+ chrome.runtime.id +'/options.html');
+  });
 
   $('#add_cart, #add_favorite').on('click', function () {
     onButtonClick(this);
